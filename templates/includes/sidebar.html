@@ -1,0 +1,18 @@
+<ul class="sidebar-nav list-group">
+
+  <li class="list-group-item"><a href="{% url "core_todo:index" %}">Home page</a></li>
+  <li class="list-group-item"><a href="{% url "core_todo:task-list" %}">Tasks</a></li>
+  <li class="list-group-item"><a href="{% url "core_todo:tag-list" %}">Tags</a></li>
+  <br>
+  {% if user.is_authenticated %}
+    <li class="list-group-item">User: <a href="#">{{ user.username }}</a></li>
+    <li class="list-group-item">
+      <form id="logout-form" action="#" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none;">Logout</button>
+      </form>
+    </li>
+  {% else %}
+    <li class="list-group-item"><a href="#">Login</a></li>
+  {% endif %}
+</ul>
