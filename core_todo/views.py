@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from core_todo.forms import TaskCreateForm
+from core_todo.forms import TaskCreateForm, TagCreateForm
 from core_todo.models import Task, Tag
 
 
@@ -49,3 +49,10 @@ class CompleteTaskView(LoginRequiredMixin, generic.TemplateView):
 
 class TagListView(LoginRequiredMixin, generic.ListView):
     model = Tag
+
+
+class TagCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Tag
+    form_class = TagCreateForm
+    template_name = "core_todo/tag_form.html"
+    success_url = reverse_lazy("core_todo:tag-list")
