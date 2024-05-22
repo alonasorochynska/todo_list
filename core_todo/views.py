@@ -24,7 +24,7 @@ def index(request):
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     queryset = Task.objects.all().prefetch_related("tags")
-    # paginate_by = 5
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -64,6 +64,7 @@ class CompleteTaskView(LoginRequiredMixin, generic.TemplateView):
 
 class TagListView(LoginRequiredMixin, generic.ListView):
     model = Tag
+    paginate_by = 5
 
 
 class TagCreateView(LoginRequiredMixin, generic.CreateView):
