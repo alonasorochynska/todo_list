@@ -20,7 +20,6 @@
     <table class="table">
       <tr>
         <th>Title</th>
-        <th>Content</th>
         <th>Deadline</th>
         <th>Created</th>
         <th>Status</th>
@@ -30,12 +29,11 @@
       {% for task in task_list %}
         <tr>
           <td><a href="{{ task.get_absolute_url }}">{{ task.title }}</a></td>
-          <td>{{ task.content }}</td>
         <td>{{ task.deadline }}</td>
         <td>{{ task.created_time }}</td>
-        <td>{{ task.status }}</td>
+        <td>{% if task.status %}✅{% else %}❌{% endif %}</td>
         <td>{{ task.owner }}</td>
-        <td>{{ task.tags }}</td>
+        <td>{{ task.get_tags_names }}</td>
         </tr>
       {% endfor %}
 

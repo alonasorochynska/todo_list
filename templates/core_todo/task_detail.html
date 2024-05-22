@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Task {{ task.title }}</h1>
+  <h1>Task name: {{ task.title }}</h1>
   <hr>
   <p><strong>Owner: </strong>{{ task.owner }}</p>
   <p><strong>Status: </strong>{% if task.status %}✅{% else %}❌{% endif %}</p>
@@ -10,4 +10,12 @@
   <p><strong>Priority: </strong>{{ task.priority }}</p>
   <p><strong>Tags: </strong>{{ task.get_tags_names }}</p>
   <p><strong>Task text: </strong>{{ task.content }}</p>
+
+  <form method="post" action="{% url 'core_todo:task-complete' task.pk %}">
+    {% csrf_token %}
+    <a href="{% url 'core_todo:task-list' %}" class="btn btn-outline-primary">CANCEL</a>
+    {% if not task.status %}
+      <button type="submit" name="action" value="complete" class="btn btn-success">COMPLETE</button>
+    {% endif %}
+  </form>
 {% endblock %}

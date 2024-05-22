@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from core_todo.models import Task, Tag
@@ -34,6 +34,15 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     # form_class = TaskCreateForm
     success_url = reverse_lazy("core_todo:task-list")
+
+
+class CompleteTaskView(LoginRequiredMixin, generic.TemplateView):
+    @staticmethod
+    def post(request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        task.status = True
+        task.save()
+        return redirect(reverse("core_todo:task-list"))
 
 
 class TagListView(LoginRequiredMixin, generic.ListView):
