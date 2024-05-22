@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <table>
+    <tr>
+      <td><h1>List of tasks</h1></td>
+      <td width="20"></td>
+      <td><a href="{% url 'core_todo:task-create' %}" class="btn btn-primary">ADD NEW TASK</a></td>
+      <td>
+        <form method="get" action="" class="form-inline">
+          {{ search_form|crispy }}
+          <input class="btn btn-secondary" type="submit" value="⌕">
+        </form>
+      </td>
+    </tr>
+  </table>
+
+  {% if task_list %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+      {% for task in task_list %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ dish.price }}</td>
+        </tr>
+      {% endfor %}
+
+    </table>
+  {% else %}
+    <p>There are no dishes yet!</p>
+  {% endif %}
+{% endblock %}

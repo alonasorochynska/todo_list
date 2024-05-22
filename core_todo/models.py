@@ -21,6 +21,7 @@ class Task(models.Model):
         ("high", "High"),
     ]
 
+    title = models.CharField(max_length=255)
     content = models.TextField()
     deadline = models.DateTimeField(null=True, blank=True)
     created_time = models.DateTimeField(auto_now_add=True)
