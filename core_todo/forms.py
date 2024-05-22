@@ -18,6 +18,12 @@ class TaskCreateForm(forms.ModelForm):
         }
 
 
+class TaskUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ("owner", "deadline", "priority", "content", "tags")
+
+
 class TaskSearchForm(forms.Form):
     tag = forms.CharField(
         max_length=255,

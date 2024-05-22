@@ -14,6 +14,7 @@
   <form method="post" action="{% url 'core_todo:task-complete' task.pk %}">
     {% csrf_token %}
     <a href="{% url 'core_todo:task-list' %}" class="btn btn-outline-primary">CANCEL</a>
+    <a href="{% url 'core_todo:task-update' pk=task.id %}" class="btn btn-primary">UPDATE</a>
     {% if not task.status %}
       <button type="submit" name="action" value="complete" class="btn btn-success">COMPLETE</button>
     {% endif %}
