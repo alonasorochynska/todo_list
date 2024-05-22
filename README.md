@@ -10,3 +10,5 @@ Featuring a clean and intuitive interface, users can easily add, edit, mark as c
 * Search Functionality: Quickly find tasks using the search feature.
 
 Get started today and streamline your task management with our To-Do List application!
+
+You can see screenshots of interface og application in IMAGES directory
