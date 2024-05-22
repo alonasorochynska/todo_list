@@ -11,4 +11,4 @@ Featuring a clean and intuitive interface, users can easily add, edit, mark as c
 
 Get started today and streamline your task management with our To-Do List application!
 
-You can see screenshots of interface og application in IMAGES directory
+### <span style="color: red;">You can see screenshots of interface og application in IMAGES directory</span>
