@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -42,3 +43,9 @@ class Task(models.Model):
         verbose_name = "task"
         verbose_name_plural = "tasks"
         ordering = ["done_time", "-created_time"]
+
+    def get_absolute_url(self):
+        return reverse("core_todo:task-detail", kwargs={"pk": self.pk})
+
+    def get_tags_names(self):
+        return ", ".join(tag.name for tag in self.tags.all())

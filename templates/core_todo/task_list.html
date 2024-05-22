@@ -4,9 +4,9 @@
 {% block content %}
   <table>
     <tr>
-      <td><h1>List of tasks</h1></td>
+      <td><h1>List of Tasks</h1></td>
       <td width="20"></td>
-      <td><a href="{% url 'core_todo:task-create' %}" class="btn btn-primary">ADD NEW TASK</a></td>
+      <td><a href="#" class="btn btn-primary">ADD NEW TASK</a></td>
       <td>
         <form method="get" action="" class="form-inline">
           {{ search_form|crispy }}
@@ -19,18 +19,28 @@
   {% if task_list %}
     <table class="table">
       <tr>
-        <th>Name</th>
-        <th>Price</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Deadline</th>
+        <th>Created</th>
+        <th>Status</th>
+        <th>Owner</th>
+        <th>Tags</th>
       </tr>
       {% for task in task_list %}
         <tr>
-          <td>{{ task.name }}</td>
-          <td>{{ dish.price }}</td>
+          <td><a href="{{ task.get_absolute_url }}">{{ task.title }}</a></td>
+          <td>{{ task.content }}</td>
+        <td>{{ task.deadline }}</td>
+        <td>{{ task.created_time }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.owner }}</td>
+        <td>{{ task.tags }}</td>
         </tr>
       {% endfor %}
 
     </table>
   {% else %}
-    <p>There are no dishes yet!</p>
+    <p>There are no tasks yet!</p>
   {% endif %}
 {% endblock %}

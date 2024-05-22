@@ -26,6 +26,10 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     # paginate_by = 5
 
 
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Task
+
+
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     # form_class = TaskCreateForm
@@ -33,4 +37,4 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class TagListView(LoginRequiredMixin, generic.ListView):
-    model = Task
+    model = Tag
