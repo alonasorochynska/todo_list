@@ -6,7 +6,7 @@
     <tr>
       <td><h1>List of Tasks</h1></td>
       <td width="20"></td>
-      <td><a href="#" class="btn btn-primary">ADD NEW TASK</a></td>
+      <td><a href="{% url 'core_todo:task-create' %}" class="btn btn-primary">ADD NEW TASK</a></td>
       <td>
         <form method="get" action="" class="form-inline">
           {{ search_form|crispy }}

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
+from core_todo.forms import TaskCreateForm
 from core_todo.models import Task, Tag
 
 
@@ -32,7 +33,8 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    # form_class = TaskCreateForm
+    form_class = TaskCreateForm
+    template_name = "core_todo/task_form.html"
     success_url = reverse_lazy("core_todo:task-list")
 
 
