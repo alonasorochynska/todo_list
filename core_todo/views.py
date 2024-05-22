@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from core_todo.forms import TaskCreateForm, TagCreateForm
+from core_todo.forms import TaskCreateForm, TagCreateForm, TaskSearchForm
 from core_todo.models import Task, Tag
 
 
@@ -25,6 +25,21 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     queryset = Task.objects.all().prefetch_related("tags")
     # paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tag = self.request.GET.get("tag", "")
+        context["search_form"] = TaskSearchForm(initial={"tag": tag})
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = TaskSearchForm(self.request.GET)
+        if form.is_valid():
+            tag_name = form.cleaned_data["tag"]
+            if tag_name:
+                queryset = queryset.filter(tags__name__icontains=tag_name)
+        return queryset
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):

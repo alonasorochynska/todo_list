@@ -5,7 +5,9 @@ from core_todo.models import Task, Tag
 
 
 class TaskCreateForm(forms.ModelForm):
-    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
+    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(),
+                                          widget=forms.CheckboxSelectMultiple,
+                                          required=False)
 
     class Meta:
         model = Task
@@ -14,6 +16,17 @@ class TaskCreateForm(forms.ModelForm):
         widgets = {
             "deadline": DateInput(attrs={"type": "date"}),
         }
+
+
+class TaskSearchForm(forms.Form):
+    tag = forms.CharField(
+        max_length=255,
+        required=False,
+        label="Search",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Search by tags"}
+        ),
+    )
 
 
 class TagCreateForm(forms.ModelForm):
